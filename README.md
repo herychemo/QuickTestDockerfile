@@ -1,2 +1,2 @@
-# QuickTestDockerfile
-This is a sample project for testing Dockerfile
+# QuickTestJenkinsfile
+This is a sample project for testing Jenkinsfile
