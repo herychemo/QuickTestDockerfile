@@ -1,6 +1,6 @@
 node {
     stage("Checkout") {
-        git credentialsId: 'ssh', url: 'git@github.com:herychemo/QuickTestJenkinsFile.git'
+        git credentialsId: 'ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
     }
     stage("Run"){
         sh """
