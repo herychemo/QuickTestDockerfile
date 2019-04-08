@@ -1,0 +1,30 @@
+
+pipeline {
+
+    agent {
+        docker { image 'node:7-alpine' }
+    }
+
+    stages {
+        stage("Checkout") {
+            steps {
+                git credentialsId: 'ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
+            }
+        }
+        stage("Environment Validation") {
+            steps {
+                sh 'node --version'
+                sh 'pwd'
+                sh 'ls -l '
+                sh 'hostname'
+            }
+        }
+        stage("Run") {
+            steps{
+                sh """
+                    node ./otherScript.js
+                """
+            }
+        }
+	}
+}
