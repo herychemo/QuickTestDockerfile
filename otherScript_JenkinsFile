@@ -1,4 +1,10 @@
 
+library identifier: 'custom-lib@master', retriever: modernSCM(
+  [$class: 'GitSCMSource',
+   remote: 'git@gitlab.com:herychemo/LabJenkinsSharedLibrary.git',
+   credentialsId: 'ssh'])
+
+
 pipeline {
 
     agent {
@@ -24,6 +30,11 @@ pipeline {
                 sh """
                     node ./otherScript.js
                 """
+            }
+        }
+        stage("Shared-lib-test") {
+            steps {
+                testStep 'something'
             }
         }
 	}
