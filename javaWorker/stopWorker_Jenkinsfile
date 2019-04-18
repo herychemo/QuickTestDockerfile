@@ -1,0 +1,29 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+
+    stages {
+        stage("Stop Worker") {
+            steps {
+                sh """
+                    docker stop java-worker && docker rm java-worker
+                """
+            }
+        }
+        stage("Verify") {
+            steps {
+                script {
+                    def CONTAINER_ID = sh script: """
+                        docker ps | grep java-worker | awk '{print \$1}'
+                    """, returnStdout: true
+                    if (CONTAINER_ID != "") {
+                        error 'Container stop failed.'
+                        return
+                    }
+                }
+            }
+        }
+    }
+
+}

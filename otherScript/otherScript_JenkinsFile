@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 
 library identifier: 'custom-lib@master', retriever: modernSCM(
   [$class: 'GitSCMSource',

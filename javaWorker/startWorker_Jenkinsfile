@@ -1,0 +1,38 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    agent any
+
+    stages {
+        stage("Docker pull") {
+            steps {
+                sh """
+                    docker stop java-worker && docker rm java-worker
+                    docker pull herychemo/java-worker-ssh:latest
+                """
+            }
+        }
+        stage("Start Worker") {
+            steps {
+                sh """
+                    docker run -d -p 22:22 -p 5555:5000 --name java-worker herychemo/java-worker-ssh:latest
+                """
+            }
+        }
+        stage("Verify") {
+            steps {
+                script {
+                    def CONTAINER_ID = sh script: """
+                        docker ps | grep java-worker | awk '{print \$1}'
+                    """, returnStdout: true
+                    if (CONTAINER_ID == "") {
+                        error 'Container startup failed.'
+                        return
+                    }
+                    echo "Container ID: ${CONTAINER_ID}."
+                }
+            }
+        }
+    }
+
+}

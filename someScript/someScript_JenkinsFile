@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 node {
     stage("Checkout") {
         git credentialsId: 'ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
