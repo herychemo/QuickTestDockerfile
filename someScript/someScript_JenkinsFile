@@ -4,7 +4,7 @@ node {
     }
     stage("Run"){
         sh """
-            bash ./someScript.sh
+            bash ./someScript/someScript.sh
         """
     }
 }

@@ -28,7 +28,7 @@ pipeline {
         stage("Run") {
             steps{
                 sh """
-                    node ./otherScript.js
+                    node ./otherScript/otherScript.js
                 """
             }
         }
