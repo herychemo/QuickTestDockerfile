@@ -44,7 +44,7 @@ pipeline {
         }
         stage("Verify ssh connection") {
             steps {
-                echo sshCmd ('pwd', 'java-worker', 'worker', 'java-worker-ssh', true, 8022)
+                echo sshCmd ('pwd', 'java-worker', 'worker', 'java-worker-ssh', true, 22)
             }
         }
     }
