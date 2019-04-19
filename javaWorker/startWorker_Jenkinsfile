@@ -1,5 +1,11 @@
 #!/usr/bin/env groovy
 
+library identifier: 'custom-lib@master', retriever: modernSCM(
+        [$class: 'GitSCMSource',
+         remote: 'git@gitlab.com:herychemo/LabJenkinsSharedLibrary.git',
+         credentialsId: 'git-ssh'])
+
+
 pipeline {
     agent any
 
@@ -7,16 +13,20 @@ pipeline {
         stage("Docker pull") {
             steps {
                 sh """
-                    docker stop java-worker && docker rm java-worker
                     docker pull herychemo/java-worker-ssh:latest
                 """
             }
         }
         stage("Start Worker") {
             steps {
-                sh """
-                    docker run -d -p 8022:22 -p 5000:5000 --name java-worker herychemo/java-worker-ssh:latest
-                """
+                script {
+                    def isRunning = isContainerRunning 'java-worker'
+                    if (!isRunning) {
+                        sh """
+                            docker run -d -p 8022:22 -p 5000:5000 --name java-worker herychemo/java-worker-ssh:latest
+                        """
+                    }
+                }
             }
         }
         stage("Verify Container Startup") {

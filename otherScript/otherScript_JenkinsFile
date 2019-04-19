@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
 
 library identifier: 'custom-lib@master', retriever: modernSCM(
-  [$class: 'GitSCMSource',
-   remote: 'git@gitlab.com:herychemo/LabJenkinsSharedLibrary.git',
-   credentialsId: 'git-ssh'])
+        [$class: 'GitSCMSource',
+         remote: 'git@gitlab.com:herychemo/LabJenkinsSharedLibrary.git',
+         credentialsId: 'git-ssh'])
 
 
 pipeline {
