@@ -3,7 +3,7 @@
 library identifier: 'custom-lib@master', retriever: modernSCM(
   [$class: 'GitSCMSource',
    remote: 'git@gitlab.com:herychemo/LabJenkinsSharedLibrary.git',
-   credentialsId: 'ssh'])
+   credentialsId: 'git-ssh'])
 
 
 pipeline {
@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-                git credentialsId: 'ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
+                git credentialsId: 'git-ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
             }
         }
         stage("Environment Validation") {
