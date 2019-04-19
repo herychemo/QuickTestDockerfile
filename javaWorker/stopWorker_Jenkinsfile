@@ -6,9 +6,14 @@ pipeline {
     stages {
         stage("Stop Worker") {
             steps {
-                sh """
-                    docker stop java-worker && docker rm java-worker
-                """
+                script {
+                    def isRunning = isContainerRunning 'java-worker'
+                    if (isRunning) {
+                        sh """
+                            docker stop java-worker && docker rm java-worker
+                        """
+                    }
+                }
             }
         }
         stage("Verify") {
