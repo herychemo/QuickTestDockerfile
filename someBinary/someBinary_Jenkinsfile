@@ -3,13 +3,22 @@
 
 pipeline {
 
-    agent { dockerfile true }
+    agent {
+        dockerfile {
+            filename 'someBinary/Dockerfile'
+        }
+    }
 
     environment {
-        WORKSPACE = pwd()
+        WORKSPACE = "${pwd()}/someBinary/"
     }
 
     stages {
+        stage("Checkout") {
+            steps {
+                git credentialsId: 'git-ssh', url: 'git@gitlab.com:herychemo/QuickTestJenkinsFile.git'
+            }
+        }
         stage("Build") {
             steps {
                 dir(WORKSPACE) {
