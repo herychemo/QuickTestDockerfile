@@ -3,14 +3,14 @@
 
 pipeline {
 
-    agent {
-        dockerfile {
-            filename 'someBinary/Dockerfile'
-        }
+    environment {
+        WORKSPACE = "${pwd()}/someBinary"
     }
 
-    environment {
-        WORKSPACE = "${pwd()}/someBinary/"
+    agent {
+        dockerfile {
+            filename "${WORKSPACE}/Dockerfile"
+        }
     }
 
     stages {
@@ -36,16 +36,14 @@ pipeline {
             steps {
                 dir(WORKSPACE) {
                     sh """
-                        ./build/SomeBinary 
+                        ./build/SomeBinary
                     """
                 }
             }
         }
         stage("Archive") {
             steps {
-                dir(WORKSPACE) {
-                    archiveArtifacts artifacts: './build/SomeBinary', onlyIfSuccessful: true
-                }
+                archiveArtifacts artifacts: "${WORKSPACE}/build/SomeBinary", onlyIfSuccessful: true
             }
         }
     }
