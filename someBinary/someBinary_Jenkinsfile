@@ -41,6 +41,13 @@ pipeline {
                 }
             }
         }
+        stage("Archive") {
+            steps {
+                dir(WORKSPACE) {
+                    archiveArtifacts artifacts: './build/SomeBinary', onlyIfSuccessful: true
+                }
+            }
+        }
     }
 
 }
