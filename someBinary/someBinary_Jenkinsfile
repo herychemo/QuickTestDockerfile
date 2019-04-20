@@ -1,0 +1,35 @@
+#!/usr/bin/env groovy
+
+
+pipeline {
+
+    agent { dockerfile true }
+
+    environment {
+        WORKSPACE = pwd()
+    }
+
+    stages {
+        stage("Build") {
+            steps {
+                dir(WORKSPACE) {
+                    sh """
+                        rm -rf build 
+                        mkdir build
+                        cd build
+                        cmake ..
+                        make
+                    """
+                }
+            }
+        }
+        stage("Run") {
+            steps {
+                sh """
+                    ./build/SomeBinary 
+                """
+            }
+        }
+    }
+
+}
