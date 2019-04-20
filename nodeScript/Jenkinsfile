@@ -29,7 +29,7 @@ pipeline {
         stage("Run") {
             steps{
                 sh """
-                    node ./otherScript/otherScript.js
+                    node ./nodeScript/main.js
                 """
             }
         }

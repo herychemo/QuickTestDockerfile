@@ -4,12 +4,12 @@
 pipeline {
 
     environment {
-        WORKSPACE = "${pwd()}/someBinary"
+        WORKSPACE = "${pwd()}/cppBinary"
     }
 
     agent {
         dockerfile {
-            filename "someBinary/Dockerfile"
+            filename "cppBinary/Dockerfile"
         }
     }
 
@@ -36,14 +36,14 @@ pipeline {
             steps {
                 dir(WORKSPACE) {
                     sh """
-                        ./build/SomeBinary
+                        ./build/MainBinary
                     """
                 }
             }
         }
         stage("Archive") {
             steps {
-                archiveArtifacts artifacts: "someBinary/build/SomeBinary", onlyIfSuccessful: true
+                archiveArtifacts artifacts: "cppBinary/build/MainBinary", onlyIfSuccessful: true
             }
         }
     }
