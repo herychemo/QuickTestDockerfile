@@ -34,9 +34,11 @@ pipeline {
         }
         stage("Run") {
             steps {
-                sh """
-                    ./build/SomeBinary 
-                """
+                dir(WORKSPACE) {
+                    sh """
+                        ./build/SomeBinary 
+                    """
+                }
             }
         }
     }
