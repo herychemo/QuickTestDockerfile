@@ -1,0 +1,3 @@
+// the configured options and settings for Tutorial
+#define MainBinary_VERSION_MAJOR @MainBinary_VERSION_MAJOR@
+#define MainBinary_VERSION_MINOR @MainBinary_VERSION_MINOR@
