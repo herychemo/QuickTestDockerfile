@@ -37,6 +37,8 @@ pipeline {
                 dir(WORKSPACE) {
                     sh """
                         ./build/MainBinary
+                        ./build/MainBinary World!
+                        ./build/MainBinary bro
                     """
                 }
             }
