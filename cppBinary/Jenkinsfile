@@ -45,7 +45,6 @@ pipeline {
             steps {
                 dir(WORKSPACE) {
                     sh """
-                        ./build/bin/MainBinary
                         ./build/bin/MainBinary World!
                         ./build/bin/MainBinary Bro.
                     """
