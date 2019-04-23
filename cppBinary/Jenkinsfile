@@ -32,20 +32,29 @@ pipeline {
                 }
             }
         }
+        stage("Unit Test") {
+            steps {
+                dir(WORKSPACE) {
+                    sh """
+                        ./build/bin/MainUnitTests
+                    """
+                }
+            }
+        }
         stage("Run") {
             steps {
                 dir(WORKSPACE) {
                     sh """
-                        ./build/MainBinary
-                        ./build/MainBinary World!
-                        ./build/MainBinary bro
+                        ./build/bin/MainBinary
+                        ./build/bin/MainBinary World!
+                        ./build/bin/MainBinary Bro.
                     """
                 }
             }
         }
         stage("Archive") {
             steps {
-                archiveArtifacts artifacts: "cppBinary/build/MainBinary", onlyIfSuccessful: true
+                archiveArtifacts artifacts: "cppBinary/build/bin/*", onlyIfSuccessful: true
             }
         }
     }
