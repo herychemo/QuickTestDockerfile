@@ -1,3 +1,5 @@
-// the configured options and settings for Tutorial
+// the configured options and settings for Main
 #define MainBinary_VERSION_MAJOR @MainBinary_VERSION_MAJOR@
 #define MainBinary_VERSION_MINOR @MainBinary_VERSION_MINOR@
+
+int main (int argc, char *argv[]);

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string>
 #include "main.h"
+#include "hello.h"
 
 int main (int argc, char *argv[]) {
     if (argc < 2) {
@@ -15,6 +16,7 @@ int main (int argc, char *argv[]) {
     }
 
     std::string name = argv[1];
-    fprintf(stdout, "Hello %s\n", name.c_str() );
+    std::string helloWithName = buildHello( name );
+    fprintf(stdout, "%s", helloWithName.c_str() );
     return 0;
 }
